@@ -10,14 +10,10 @@ from blockchain_parser.undo import get_block_transaction_undos
 code = sys.argv[1] # eg., BTC
 path = sys.argv[2] # eg., /mnt/BTC/blocks
 
-mysql_params = { 'MYSQL_DATABASE': 'swatt', 'MYSQL_USER': 'root' }
-mysql_vars = [ 'HOST', 'USER', 'PASSWORD', 'DATABASE' ]
-for var in mysql_vars:
-    mysql_var = 'MYSQL_%s' % var
-    if not os.environ.get(mysql_var) and not mysql_params.get(mysql_var):
-        print('MYSQL_%s' % var, 'must be specified.')
-        sys.exit(1)
-    mysql_params[var] = os.environ.get('MYSQL_%s' % var)
+mysql_database = 'swatt'
+mysql_user = 'root'
+mysql_host = sys.argv[3]
+mysql_password = sys.argv[4]
 
 progress_file = '.ingest_progress.%s' % code
 block_index_cache = '.ingest_block_index.%s.pickle' % code
@@ -130,7 +126,7 @@ def main():
     height = int(height) + 1
 
     print('Starting ingestion at height %d' % height)
-    connection = mysql.connector.connect(host=MYSQL_HOST, user=MYSQL_USER, database=MYSQL_DATABASE, password=MYSQL_PASSWORD)
+    connection = mysql.connector.connect(host=mysql_host, user=mysql_user, database=mysql_database, password=mysql_password)
     cursor = connection.cursor()
 
     blockchain = Blockchain(path, cache=block_index_cache)
