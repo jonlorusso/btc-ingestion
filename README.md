@@ -29,8 +29,8 @@ docker run --name bitcoin-ingest -v /mnt/BTC_bak:/root/.bitcoin -dit docker.dev.
 Logs
 =====
 
-`docker logs -f litecoin-ingest`
-`docker logs -f bitcoin-ingest`
+- `docker logs -f litecoin-ingest`
+- `docker logs -f bitcoin-ingest`
 
 Sample output
 -------------
