@@ -24,6 +24,8 @@ Usage
 docker run --name litecoin-ingest -v /mnt/LTC_2:/root/.litecoin -it docker.dev.ruvpfs.swatt.exchange/litecoin-ingest
 
 docker run --name bitcoin-ingest -v /mnt/BTC_bak:/root/.bitcoin -dit docker.dev.ruvpfs.swatt.exchange/bitcoin-ingest
+
+docker run --name bitcoincash-ingest -v /mnt/BCH_2:/root/.bitcoin -dit docker.dev.ruvpfs.swatt.exchange/bitcoincash-ingest
 ```
 
 Logs
