@@ -23,7 +23,7 @@ block_data_sql =  ( """ REPLACE INTO BLOCK_DATA ( BLOCKCHAIN_CODE, HASH, TRANSAC
       VERSION_HEX, NONCE, PREV_HASH, NEXT_HASH, AVG_FEE, AVG_FEE_SCALE, AVG_FEE_RATE,
       AVG_FEE_RATE_SCALE, INDEXED, LARGEST_TX_HASH, LARGEST_TX_AMOUNT, LARGEST_TX_AMOUNT_SCALE,
       LARGEST_FEE, LARGEST_FEE_SCALE, SMALLEST_FEE, SMALLEST_FEE_SCALE, INDEXING_DURATION, IS_CLEAN )
-      VALUES ( 'BTC', %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s )
+      VALUES ( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s )
     """ )
 
 def insert_block_data(connection, block_data):
@@ -82,7 +82,8 @@ def to_block_data(blockchain, block, block_undo):
     else:
         smallest_fee = smallest_fee * (10**11)
 
-    return ( block.hash,
+    return ( code,
+      block.hash,
       transaction_count,
       block.height,
       block.header.difficulty * (10**2),
